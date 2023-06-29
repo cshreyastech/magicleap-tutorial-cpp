@@ -6,7 +6,7 @@ class Shader;
 
 class Cube {
 public:
-	Cube(int steps);
+	Cube();
 	~Cube();
 
 public:

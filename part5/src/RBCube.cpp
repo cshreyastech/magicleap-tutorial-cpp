@@ -32,7 +32,7 @@ const char APP_TAG[] = "C-ENGINE-CYL";
 // 	}
 // }
 
-Cube::Cube(int steps) {
+Cube::Cube() {
 	// _steps = steps;
 	// _verts = (_steps + 1) * 2; 
 
@@ -53,9 +53,9 @@ void Cube::ApplyShader(Shader& shader) {
 	_projId = glGetUniformLocation(_progId, "projFrom3D");
 	GLuint location = glGetAttribLocation(_progId, "coord3D");
 
-  float a = 0.5f;
-  // float multiplyer = 1.0f;
-  // a *= multiplyer;
+  float a = 1.0f;
+  float multiplyer = 0.02f;
+  a *= multiplyer;
 
   float vertices[] = {
      a,  a, -a,

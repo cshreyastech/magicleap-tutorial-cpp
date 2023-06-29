@@ -22,6 +22,7 @@
 
 #define COLOR_RED glm::vec3(1,0,0)
 #define COLOR_GREEN glm::vec3(0,1,0)
+#define COLOR_BLUE glm::vec3(0,0,1)
 
 // -----------------------------------------------------------------------------
 // Part 2: ML helper functions
@@ -225,10 +226,23 @@ int main() {
 	// square.ApplyShader(shader3D);
 	// square.SetColor(COLOR_RED);
 
-	Cube cube = Cube(16);
-	cube.ApplyShader(shader3D);
-	cube.SetColor(COLOR_RED);
+	Cube left_eye = Cube();
+	left_eye.ApplyShader(shader3D);
+	left_eye.SetColor(COLOR_RED);
+	// glm::vec3 pos = left_eye.GetPosition();
+	left_eye.SetPosition(-0.1f, 0.0f, 0.0f);
 
+	Cube fixation = Cube();
+	fixation.ApplyShader(shader3D);
+	fixation.SetColor(COLOR_GREEN);
+	// glm::vec3 pos = fixation.GetPosition();
+	fixation.SetPosition(0.0f, 0.0f, 0.0f);
+
+	Cube right_eye = Cube();
+	right_eye.ApplyShader(shader3D);
+	right_eye.SetColor(COLOR_BLUE);
+	// glm::vec3 pos = left_eye.GetPosition();
+	right_eye.SetPosition(0.1f, 0.0f, 0.0f);
 
 	// The main/game loop
 	ML_LOG_TAG(Debug, APP_TAG, "Enter main loop");
@@ -289,7 +303,10 @@ int main() {
 				// Part 2: Render the object
 				// cylinder.Render(projectionMatrix);
 				// square.Render(projectionMatrix);
-				cube.Render(projectionMatrix);
+				
+				left_eye.Render(projectionMatrix);
+				fixation.Render(projectionMatrix);
+				right_eye.Render(projectionMatrix);
 
 				// Bind the frame buffer
 				glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -313,12 +330,22 @@ int main() {
 	ML_LOG_TAG(Debug, APP_TAG, "End application loop");
 
 	graphics_context.unmakeCurrent();
-
 	glDeleteFramebuffers(1, &graphics_context.framebuffer_id);
-
 	MLGraphicsDestroyClient(&graphics_client);
-
+	MLPerceptionShutdown();
 	ML_LOG_TAG(Debug, APP_TAG, "System cleanup done");
+
+
+  // glDeleteFramebuffers(1, &framebuffer_id);
+
+  // // clean up system
+  // UNWRAP_MLRESULT(MLHeadTrackingDestroy(head_tracker_));
+  // UNWRAP_MLRESULT(MLEyeTrackingDestroy(eye_tracker_));
+  
+  // UNWRAP_MLRESULT(MLGraphicsDestroyClient(&graphics_client));
+  // UNWRAP_MLRESULT(MLPerceptionShutdown());
+
+
 
 	return 0;
 }
