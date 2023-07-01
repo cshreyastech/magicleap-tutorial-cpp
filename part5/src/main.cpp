@@ -16,6 +16,7 @@
 #include "RBCylinder.h"
 #include "RBSquare.h"
 #include "RBCube.h"
+#include "RBTexture.h"
 
 // -----------------------------------------------------------------------------
 // Part 2: Define a color
@@ -217,6 +218,9 @@ int main() {
 	Shader shader3D = Shader();
 	shader3D.Load("shader/standard3D.vert", "shader/standard.frag");
 
+	Shader shaderTex = Shader();
+	shaderTex.Load("shader/texture.vert", "shader/texture.frag");
+
 	// Part 2: Instantiate the objec(s) here 
 	// Cylinder cylinder = Cylinder(16);
 	// cylinder.ApplyShader(shader3D);
@@ -243,6 +247,10 @@ int main() {
 	right_eye.SetColor(COLOR_BLUE);
 	// glm::vec3 pos = left_eye.GetPosition();
 	right_eye.SetPosition(0.1f, 0.0f, 0.0f);
+
+	Texture texture = Texture();
+	right_eye.ApplyShader(shaderTex);
+
 
 	// The main/game loop
 	ML_LOG_TAG(Debug, APP_TAG, "Enter main loop");
@@ -304,9 +312,10 @@ int main() {
 				// cylinder.Render(projectionMatrix);
 				// square.Render(projectionMatrix);
 				
-				left_eye.Render(projectionMatrix);
-				fixation.Render(projectionMatrix);
-				right_eye.Render(projectionMatrix);
+				// left_eye.Render(projectionMatrix);
+				// fixation.Render(projectionMatrix);
+				// right_eye.Render(projectionMatrix);
+				texture.Render(projectionMatrix);
 
 				// Bind the frame buffer
 				glBindFramebuffer(GL_FRAMEBUFFER, 0);

@@ -6,12 +6,13 @@ SRCS = 	src/main.cpp \
        	src/RBShader.cpp \
        	src/RBCylinder.cpp \
        	src/RBSquare.cpp \
-       	src/RBCube.cpp
+       	src/RBCube.cpp \
+       	src/RBTexture.cpp
 
  
 DEFS.device = ML_DEVICE
 
 USES = ml_sdk OpenGL stdc++
 
-OPTIONS = standard-c++/11 exceptions/on warn/on
+OPTIONS = standard-c++/17 exceptions/on warn/on
 
